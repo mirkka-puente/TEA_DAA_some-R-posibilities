@@ -2,17 +2,17 @@
 #----------------------by Alfonso Garmendia---------------------------
 
 #### load R data ---------------------
-# data()  # see a list of all data sets in "datasets" package
+data()  # see a list of all data sets in "datasets" package
 ### To load the data iris
-# data(iris)
+data(iris)
 d <- iris
-# ?iris # see the help of iris data
+?iris # see the help of iris data
 ### look the loaded data in "Environment"
-# ls()
+ls()
 ### press on the d to see the data 
-# View(d)
+View(d)
 ### press on the blue arrow to see the structure of the data
-# str(d)
+str(d)
 
 #### Easy Base R plots -------------------
 plot(d)
@@ -36,4 +36,5 @@ plot(Sepal.Length ~ Sepal.Width, data = d,
 legend("topright", title = "Species",
   legend = c("Iris setosa", "Iris versicolor", "Iris virginica"), 
   pch = 1, col = 1:3, text.font = c(3,3,3))
+
 
