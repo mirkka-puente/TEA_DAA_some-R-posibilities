@@ -1,0 +1,112 @@
+---
+title: "Example of Rmarkdown document"
+author:
+- affiliation: Universitat Politècnica de València.
+  name: Alfonso Garmendia
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    fig_caption: yes
+    highlight: tango
+    self_contained: yes
+    toc: yes
+    toc_depth: 6
+---
+
+```{r setup, include=FALSE}
+#### libraries -----------------------------------------------
+library(knitr)
+
+#### Results folder ------------------------------------------
+# if (!dir.exists("results")) dir.create("results")
+# if (!dir.exists("results/figures")) dir.create("results/figures")
+#### Knit options --------------------------------------------
+opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
+  results = 'markup',
+  # fig.path = "results/figures/",
+  dev = "png",                      # png Figures format
+  dev.args = list(type = "cairo"),  # png args
+  dpi = 100                         # 300 for publication
+)
+
+#### preset figures numbers  ---------------------------------
+fn <- 0                                        # figure number
+tn <- 0                                        # table number
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see the [get started lessons](https://rmarkdown.rstudio.com/lesson-1.html), the [gallery](https://rmarkdown.rstudio.com/gallery.html) or [other references](https://rmarkdown.rstudio.com/docs/index.html) in the RStudio web [page](https://rmarkdown.rstudio.com).
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+You decide which code and results will be shown in the final document, if any, using the chunk knit options:
+
+1.  eval = FALSE will not run the code.
+2.  include = false will run the code, but not show it.
+3.  results = 'hide' will run the code but hide the results.
+
+There are [many more](https://yihui.org/knitr/options/), this is only a selection.
+
+For example, the next code is not evaluated:
+
+```{r lm iris, eval=FALSE}
+lm.iris <- lm(Sepal.Length ~ Species, data = iris)
+summary(lm.iris)
+anova(lm.iris)
+
+```
+
+### Tables
+
+A good command for tables is *knitr::kable()*. Look at the way to insert the legend.
+
+- The *iris* dataframe has `r length(iris)` variables: `r names(iris)`.
+
+```{r}
+tn <- tn + 1
+cap <- paste(paste0("Table ", tn, ":"), "Table made with the command 'kable()'. It shows the first ten rows of the iris data frame.")
+
+kable(head(iris, 10), caption = cap)
+
+```
+
+### Plots
+
+You can also embed plots, for example:
+
+```{r fig_iris, fig.cap=cap, echo=FALSE}
+fn <- fn + 1
+cap <- paste(paste0("Figure ", fn, ":"), "Iris data relationships.")
+
+plot(iris[1:4], col = iris$Species, pch = 21, bg = iris$Species)
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing the R code that generated the plot.
+
+Look also the way of adding a caption.
+
+### Other features
+
+Other nice features to include into a document are: 
+
+1. lists
+    - numerical or bullets
+1. **bold** or *italic* or **_both_**
+1. Equations
+
+See that the numbers are not important and will always be ordered.
+
+#### Equations
+
+It is possible to add equations into the text or as separate paragraph.
+
+This is the chisq formula inline $\chi^2_{n-1} = \sum_1^n \frac{(observed_i - expected_i)^2}{expected_i}$.
+
+Also as a outstanding formula:
+
+$$\chi^2_{n-1} = \sum_1^n \frac{(observed_i - expected_i)^2}{expected_i} $$
+
